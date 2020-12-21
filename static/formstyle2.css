@@ -1,0 +1,96 @@
+/* CSS for Meter*/
+/* Main outer circle*/
+.circular{
+    height:120px;
+    width:120px;
+    background:#4158d0;
+    position: relative;
+   -webkit-border-radius: 100%;
+    align-content: center;
+
+}
+/*.circular .outer{
+
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 100px;
+    margin: -40px 0 0 -40px;
+    background: #dde6f0  ;
+    border-radius:  100%;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    
+}*/
+
+/*circular .inner{
+
+    position: relative;
+    z-index:0;
+    top: 50%;
+    left: 50%;
+    height: 80px;
+    width: 80px;
+    margin: -40px 0 0 -40px;
+    background:#0D10CC;
+    border-radius:  100%;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    
+    
+}*/
+/* To display percentage*/
+.circular .numb{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    font-size: 18px;
+    font-weight: 500;
+    color:#4158d0 ;
+}
+/* Inside circle*/
+.circular .bar{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background: #fff;
+    -webkit-border-radius: 100%;
+    clip: rect(0px,100px, 100px,50px);
+    align-content: center;
+    margin-left: 9px;
+    margin-top: 9px;
+}
+/* For animation*/
+.circle .bar .progress{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    -webkit-border-radius: 100%;
+    clip: rect(0px,50px, 100px,50px);
+    background: #4158d0;
+}
+.circle .left .progress{
+    z-index: 1;
+   animation: left 4s linear both;
+}
+@keyframes left{
+    100%{
+        transform: rotate(180deg);
+    }
+}
+.circle .right {
+    z-index: 3;
+    transform: rotate(180deg);
+    
+}
+.circle .right .progress{
+    animation: right 4s linear both;
+    animation-delay: 4s;
+}
+@keyframes right{
+    100%{
+        transform: rotate(180deg);
+    }
+}

@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+            table tr:not(:first-child){
+                cursor: pointer;transition: all .25s ease-in-out;
+            }
+            table tr:not(:first-child):hover{background-color: #ddd;}
+    </style>
+</head>
+<body onload="loadSearchMessage()">
+    <center>
+        <fieldset>
+        <legend >Basic Form</legend>
+
+        <form method="POST" id="myform"  >
+            <table>
+                <tr>
+                    <td >Patient ID</td>
+                    <td> <input type="number" name="id" id="pid" > </td>
+                    <td ></td>
+                    <td>Patient Name</td>
+                    <td> <input type="text" name="p_name" id="pname"  > </td>
+<!--                    <td>Patient Phone Number</td>-->
+<!--                    <td> <input type="number" name="p_no" id="pno"  > </td>-->
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td> <input type="number" name="age" min=1 id="age" > </td>
+                    <td></td>
+                    <td>Date</td>
+                    <td> <input type="date" name="date" id="date" onload="getdate();" > </td>
+                     <td> <button type="submit" onclick="SearchPatient()" >Search Patient</button></td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>Referred By</td>
+                    <td> <input type="text" name="d_name" id="dname"  > </td>
+                    <td></td>
+                    <td>Marital Status</td>
+                    <td> <select name="mstatus" id="mstatus">
+                        <option value=0 >M</option>
+                        <option value=1 >UM</option>
+                        </select> </td>
+
+                </tr>
+
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>Breast Feeding History </td>
+                    <td> <select name="BF_History" id="BF_History">
+                        <option value=0>BF</option>
+                        <option value=1>NF</option>
+                        </select></td>
+                    <td>  </td>
+                    <td>Age during 1st Pregnancy </td>
+                    <td><select name="1Pregnancy_age" id="1Pregnancy_age">
+                        <option value=0>BL</option>
+                        <option value=1>AB</option>
+                        </select> </td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>BC Family History </td>
+                    <td><select name="f_history" id="f_history">
+                        <option value=0>No History</option>
+                        <option value=1>Close Relative</option>
+                        <option value=2>SS/DD/MM</option>
+                        </select> </td>
+                    <td>   </td>
+                    <td>Radiation History</td>
+                    <td> <select name="R_history" id="R_history">
+                        <option value=0>Less than S</option>
+                        <option value=1>More than US</option>
+                        </select> </td>
+
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>  Breast Profile </td>
+                    <td><select name="b_history" id="b_history" >
+                        <option value=0>R</option>
+                        <option value=1>SS</option>
+                        <option value=2>LS</option>
+                        <option value=2>OB</option>
+                        </select>   </td>
+                    <td>   </td>
+                    <td>Self-History of BC </td>
+                    <td> <select name="self_history" id="self_history">
+                        <option value=0>No </option>
+                        <option value=10>Yes</option>
+                        </select> </td>
+
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+                    <td>Medicine Consumption History </td>
+                    <td> <select name="Medicine_history" id="Medicine_history">
+                        <option value=0>N</option>
+                        <option value=1>Y</option>
+                        </select> </td>
+                </tr>
+                <tr>
+                    <td>Special Remarks </td>
+                    <td> <textarea id="remarks">Remarks</textarea> </td>
+                </tr>
+                <tr >
+                    <td> <button type="submit"  >Load Images</button></td>
+                   <td colspan="2"> <button type="submit"  >Save Information</button> </td>
+                    <td > <button type="submit" >Report</button></td>
+                </tr>
+                <tr>
+
+                </tr>
+            </table>
+        </form>
+<!--            {{data}}-->
+        <div id="appendTable"></div>
+        </fieldset>
+    </center>
+    <script type="text/javascript">
+
+
+    function validation(){
+        var a = document.getElementById("pname").value;
+        var b = document.getElementById("dname").value;
+
+
+        const pattern= /^[A-Za-z]+$/;
+
+        var test1 = pattern.test(String(a));
+        var test2 = pattern.test(String(b));
+<!--        alert(test2)-->
+
+        if(!test1){
+            pname.setCustomValidity("Enter proper name");
+
+        }
+
+
+        if(!test2){
+            dname.setCustomValidity("Enter proper name");
+
+        }
+
+
+    }
+    function SearchPatient(){
+        var found = [];
+         document.getElementById("myform").setAttribute("onsubmit","return false");
+        var pname1=document.getElementById("pname").value;
+        var data=JSON.parse('{{data|tojson}}');
+        console.log(data);
+
+
+
+            for(var i=0;i<data.length;i++){
+
+                if(data[i][1]===pname1){
+
+                    found=found.concat([data[i]]);
+                }
+            }
+            var table = document.createElement('table');
+            table.border='1';
+            var tr = document.createElement('tr');
+
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+
+            var text1 = document.createTextNode('Name');
+            var text2 = document.createTextNode('Date Of Birth');
+            td1.appendChild(text1);
+            td2.appendChild(text2);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+
+            table.appendChild(tr);
+        for (var i = 0; i < found.length; i++){
+            var tr = document.createElement('tr');
+
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+
+            var text1 = document.createTextNode(found[i][1]);
+            var text2 = document.createTextNode(found[i][2]);
+
+            td1.appendChild(text1);
+            td2.appendChild(text2);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+
+            table.appendChild(tr);
+        }
+
+        document.getElementById("appendTable").appendChild(table);
+        for(var i = 0; i <= found.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                         rIndex = this.rowIndex;
+                         console.log(rIndex);
+                         document.getElementById("myform").removeAttribute("onsubmit");
+                         fillData(rIndex);
+                         document.getElementById("myform").removeAttribute("onsubmit");
+
+                    };
+                }
+
+        function fillData(index){
+            var newIndex=index-1;
+            document.getElementById("pid").value = found[newIndex][0];
+            document.getElementById("pname").value = found[newIndex][1];
+            document.getElementById("age").value = found[newIndex][2];
+            document.getElementById("date").value = found[newIndex][3];
+            document.getElementById("dname").value = found[newIndex][4];
+            document.getElementById("mstatus").value = found[newIndex][5];
+            document.getElementById("BF_History").value = found[newIndex][6];
+            document.getElementById("1Pregnancy_age").value = found[newIndex][7];
+            document.getElementById("f_history").value = found[newIndex][8];
+            document.getElementById("R_history").value = found[newIndex][9];
+            document.getElementById("b_history").value = found[newIndex][10];
+            document.getElementById("self_history").value = found[newIndex][11];
+            document.getElementById("Medicine_history").value = found[newIndex][12];
+
+
+        }
+
+    }
+    function loadSearchMessage(){
+        alert("If you want to search Patient then Search by Entering name");
+    }
+
+
+
+    </script>
+</body>
+</html>
