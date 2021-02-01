@@ -2,24 +2,57 @@
 <html>
 <head>
 	<title>get images</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-	<fieldset>
-		<form method="POST" enctype="multipart/form-data">
-		<input type="number" name="id" id="pid" required> 
-			
-		<label>Enter the images (Expected 6 images)*:</label> <br>
+	<table>
+		<tr>
+		  <td>
+			<canvas id="lcd-canvas" width="400" height="400"></canvas>
+		  </td>
+		  <td style="display: none;">
+			<img id="lcd-canvas-image" width="68" height="22"></img>
+		  </td>
+		</tr>
+		<input type="file" name="Img1" id="Img1">
+		<button id="uploadImg1" value="UpkoadImg1">Upload Image 1</button>
+  	</table>
 
-		<input type="file" name="img1" id="img1" required> <br>
-		<input type="file" name="img2" id="img2" required> <br>
-		<input type="file" name="img3" id="img3" required> <br>
-		<input type="file" name="img4" id="img4" required> <br>
-		<input type="file" name="img5" id="img5" required> <br>
-		<input type="file" name="img6" id="img6" required> <br>
-		
-		<input type="submit" value="Submit">
-		</form>
-	</fieldset>
+	<script>
+        /*var image = document.getElementById("lcd-canvas-image");
+		var imgURL = 'data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==';
+		image.src = imgURL;
+		image.onload = function() {
+	  		alert('image loaded');
+		  	var can = document.getElementById('lcd-canvas');
+		  	var ctx = can.getContext('2d');
+		  	//can.width='400px';
+		  	//can.height='400px';
+		  	ctx.drawImage(image,0,0);
+		}*/
+		$("#Img1").on("change", function() {
+			var fileReader = new FileReader();
+			fileReader.readAsDataURL($('#Img1').prop('files')[0]);
+			fileReader.onload = function () {
+      			var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+      			alert(data);
+      			var image = document.getElementById("lcd-canvas-image");
+      			image.src = data;
+      			var can = document.getElementById('lcd-canvas');
+				var ctx = can.getContext('2d');
+
+      			var scale = Math.min(can.width / image.width, can.height / image.height);
+				// get the top left position of the image
+				var x = (can.width / 2) - (image.width / 2) * scale;
+				var y = (can.height / 2) - (image.height / 2) * scale;
+				image.onload = function() {
+					alert('image loaded');
+					//ctx.drawImage(image,0,0);
+					ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+				}
+    		};
+		});
+    </script>
 
 </body>
 </html>
