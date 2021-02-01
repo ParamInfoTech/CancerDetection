@@ -31,5 +31,17 @@ def senddata():
     return render_template("formh.html", data=f)
 
 
+@app.route("/uploadImage", methods=["POST","GET"])
+def uploadImage():
+    if request.method == "POST":
+        uploaded_file = request.files['img1']
+        if uploaded_file.filename != '':
+            print(uploaded_file.filename)
+            data = uploaded_file.read()
+            print(data)
+        return render_template("iget.html", )
+    else:
+        return render_template("iget.html")
+
 if __name__=="__main__":
     app.run(debug=True)
