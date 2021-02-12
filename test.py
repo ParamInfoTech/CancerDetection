@@ -1,8 +1,16 @@
 import sqlite3
 from flask import Flask, request, render_template
-
+import mysql.connector
 
 app = Flask(__name__)
+
+conn= mysql.connector.connect(host="localhost",user="root",password="") 
+c=conn.cursor()
+c.execute('create database if not exists test')
+conn.close()
+
+conn= mysql.connector.connect(host="localhost",user="root",password="",database="test") 
+c=conn.cursor()
 
 
 @app.route("/",methods=["POST","GET"])
@@ -11,8 +19,10 @@ def senddata():
     if request.method == "POST":
         result = request.form
         print("Gauranga")
+        '''
         conn = sqlite3.connect("test.db")
         c = conn.cursor()
+        '''
         if result["age"] != "":
             print(result["age"], 'Nitai');
             c.execute('CREATE TABLE if not exists dbtest( p_id INT,name TEXT,age INT, date TEXT,'
@@ -29,24 +39,6 @@ def senddata():
 
         conn.close()
     return render_template("formh.html", data=f)
-
-
-@app.route("/uploadImage", methods=["POST","GET"])
-def uploadImage():
-    if request.method == "POST":
-        uploaded_file = request.files['img1']
-        if uploaded_file.filename != '':
-            print(uploaded_file.filename)
-            data = uploaded_file.read()
-            print(data)
-        return render_template("iget.html", )
-    else:
-        return render_template("iget.html")
-
-
-@app.route("/imageOps", methods=["POST", "GET"])
-def imageOps():
-    return render_template("ImageOps.html")
 
 
 if __name__=="__main__":
