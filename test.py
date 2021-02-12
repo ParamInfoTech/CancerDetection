@@ -43,5 +43,11 @@ def uploadImage():
     else:
         return render_template("iget.html")
 
+
+@app.route("/imageOps", methods=["POST", "GET"])
+def imageOps():
+    return render_template("ImageOps.html")
+
+
 if __name__=="__main__":
     app.run(debug=True)
