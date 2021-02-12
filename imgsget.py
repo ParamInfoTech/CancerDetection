@@ -1,4 +1,5 @@
 import sqlite3
+import mysql.connector
 import cv2
 from flask import Flask, request, render_template
 import matplotlib.pyplot as plt
@@ -12,10 +13,15 @@ app=Flask(__name__)
 
 def sendidata():
     if request.method=="POST":
-        arr=['img1','img2','img3','img4','img5','img6'] 
+        arr=['img1','img2','img3','img4','img5','img6']
+        '''
         conn=sqlite3.connect("test.db")
         c=conn.cursor()
+        '''
+        conn= mysql.connector.connect(host="localhost",user="root",password="",database="test") 
+        c=conn.cursor()
         #c.execute("drop table imagedb")
+
         
         def convertToBinaryData(filename):
             #Convert digital data to binary format
@@ -36,8 +42,16 @@ def sendidata():
             with open("i1.jpg", "wb") as image:
                 image.write(result.read())
                 image.close()
+            
             f=convertToBinaryData("i1.jpg")
-            c.execute('INSERT INTO imagedb(p_id,iname,im) VALUES (?,?,?)', (int(pid),i,f) )
+            
+            #f=result.read()
+            print(result.filename,pid,i,len(f))
+            #print(result.path)
+            #print(result.read())
+            
+            
+            c.execute('INSERT INTO imagedb(p_id,iname,im) VALUES (%s,%s,%s)', (int(pid),i,f) )
         
         c.execute('SELECT count(*) from imagedb')
         i=c.fetchall()
@@ -52,10 +66,10 @@ def sendidata():
             l=len(f)
             for i in range(l):
                 cptopc(f[i][2])
-                plt.subplot(l//3,3,i+1).set_title("id"+str(f[i][0])+" "+str(f[i][1]))
-                img = mpimg.imread("i1.jpg")
-                plt.imshow(img)
-            plt.show()
+                #plt.subplot(l//3,3,i+1).set_title("id"+str(f[i][0])+" "+str(f[i][1]))
+                img = cv2.imread("i1.jpg")
+                #plt.imshow(img)
+                ##plt.show()
         except:
             print(" some other err occured")
         #end display
@@ -69,7 +83,7 @@ def sendidata():
         conn.close()        
         print("Success")
         
-    return render_template("iget.html")
+    return render_template("igetsample.html")
         
         
 if(__name__=="__main__"):
