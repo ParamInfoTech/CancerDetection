@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>get images</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+	<table>
+		<tr>
+		  <td>
+			<canvas id="lcd-canvas" width="400" height="400"></canvas>
+		  </td>
+		  <td style="display: none;">
+			<img id="lcd-canvas-image"></img>
+		  </td>
+		</tr>
+		<input type="file" name="Img1" id="Img1">
+		<button id="uploadImg1" value="UpkoadImg1">Upload Image 1</button>
+  	</table>
+
+	<script>
+		var x1, y1, x2, y2;
+		$(document).ready(function() {
+			$("#lcd-canvas").on("mousedown", function(event) {
+				x1 = event.offsetX;
+				y1 = event.offsetY;
+			});
+
+			$("#lcd-canvas").on("mouseup", function(event) {
+				x2 = event.offsetX;
+				y2 = event.offsetY;
+				alert(x1 + " " + y1);
+				alert(x2 + " " + y2);
+
+				var can = document.getElementById('lcd-canvas');
+				var context = can.getContext('2d');
+				context.beginPath();
+			  	context.rect(x1, y1, x2-x1, y2-y1);
+			  	context.lineWidth = 1;
+			  	context.strokeStyle = 'black';
+			  	context.stroke();
+			});
+		});
+
+
+		$("#Img1").on("change", function() {
+			var fileReader = new FileReader();
+			fileReader.readAsDataURL($('#Img1').prop('files')[0]);
+			fileReader.onload = function () {
+      			var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+      			var image = document.getElementById("lcd-canvas-image");
+      			image.src = data;
+      			var can = document.getElementById('lcd-canvas');
+				var ctx = can.getContext('2d');
+
+				/*
+      			var scale = Math.min(can.width / image.width, can.height / image.height);
+				// get the top left position of the image
+				var x = (can.width / 2) - (image.width / 2) * scale;
+				var y = (can.height / 2) - (image.height / 2) * scale;
+				*/
+
+				image.onload = function() {
+					var can = document.getElementById('lcd-canvas');
+					var ctx = can.getContext('2d');
+					var imageObj = document.getElementById('lcd-canvas-image');
+					ctx.canvas.width = imageObj.width;
+				  	ctx.canvas.height = imageObj.height;
+					ctx.drawImage(imageObj, 0, 0,imageObj.width,imageObj.height);
+				}
+    		};
+		});
+    </script>
+</body>
+</html>
