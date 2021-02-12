@@ -1,57 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>get images</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='formstyle2.css') }}">
+  <title>get images</title>
 </head>
 <body>
-	<table>
-		<tr>
-		  <td>
-			<canvas id="lcd-canvas" width="400" height="400"></canvas>
-		  </td>
-		  <td style="display: none;">
-			<img id="lcd-canvas-image" width="68" height="22"></img>
-		  </td>
-		</tr>
-		<input type="file" name="Img1" id="Img1">
-		<button id="uploadImg1" value="UpkoadImg1">Upload Image 1</button>
-  	</table>
+  <fieldset>
+    <form method="POST" enctype="multipart/form-data">
+    <center>
+    <legend>Enter the images (Expected 6 images)*:</legend> <br>
+    <input type="number" name="id" id="pid" required> 
+    </center>
+    <!--
+    <input type="file" name="img1" id="img1" required> <br>
+        -->
+            <div class="container-fluid">
+                
+                <div class="container">
+                    <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 1:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img1" id="img1" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas1" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image1" width="68" height="22" style="display: none;"></img> </div>
+                  </div>
+                    <br>
+                  <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 2:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img2" id="img2" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas2" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image2" width="68" height="22" style="display: none;"></img> </div>
+                  </div>
+                    <br>
+                  <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 3:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img3" id="img3" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas3" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image3" width="68" height="22" style="display: none;"></img> </div>
+                  </div>
+                  <br>
+                  <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 3:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img4" id="img4" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas4" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image4" width="68" height="22" style="display: none;"></img> </div>
+                  </div>
+                    <br>
+                 <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 5:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img5" id="img5" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas5" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image5" width="68" height="22" style="display: none;"></img> </div>
+                  </div>
 
-	<script>
+                    <br>
+                  <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2">Image View 6:</div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">    <input type="file" name="img6" id="img6" required> </div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"><canvas id="lcd-canvas6" width="400" height="400"></canvas></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">      <img id="lcd-canvas-image6" width="68" height="22" style="display: none;"></img> </div>               </div>
+                  <br>
+
+                    <div class="row ">
+                      <div class="col-sm-6 col-md-6 col-lg-2"></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3"></div>
+                      <div class="col-sm-6 col-md-6 col-lg-2"></div>
+                      <div class="col-sm-6 col-md-6 col-lg-3">  <input type="submit" value="Submit"> </div>
+                    </div>
+          </div>
+            </div>
+
+    
+    <!--
+    <input type="file" name="img3" id="img3" required> <br>
+    <input type="file" name="img4" id="img4" required> <br>
+    <input type="file" name="img5" id="img5" required> <br>
+    <input type="file" name="img6" id="img6" required> <br>
+    -->
+    </form>
+  </fieldset>
+    <script>
         /*var image = document.getElementById("lcd-canvas-image");
-		var imgURL = 'data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==';
-		image.src = imgURL;
-		image.onload = function() {
-	  		alert('image loaded');
-		  	var can = document.getElementById('lcd-canvas');
-		  	var ctx = can.getContext('2d');
-		  	//can.width='400px';
-		  	//can.height='400px';
-		  	ctx.drawImage(image,0,0);
-		}*/
-		$("#Img1").on("change", function() {
-			var fileReader = new FileReader();
-			fileReader.readAsDataURL($('#Img1').prop('files')[0]);
-			fileReader.onload = function () {
-      			var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
-      			alert(data);
-      			var image = document.getElementById("lcd-canvas-image");
-      			image.src = data;
-      			var can = document.getElementById('lcd-canvas');
-				var ctx = can.getContext('2d');
+    var imgURL = 'data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==';
+    image.src = imgURL;
+    image.onload = function() {
+        alert('image loaded');
+        var can = document.getElementById('lcd-canvas');
+        var ctx = can.getContext('2d');
+        //can.width='400px';
+        //can.height='400px';
+        ctx.drawImage(image,0,0);
+    }*/
+    $("#img1").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img1').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image1");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas1');
+        var ctx = can.getContext('2d');
 
-      			var scale = Math.min(can.width / image.width, can.height / image.height);
-				// get the top left position of the image
-				var x = (can.width / 2) - (image.width / 2) * scale;
-				var y = (can.height / 2) - (image.height / 2) * scale;
-				image.onload = function() {
-					alert('image loaded');
-					//ctx.drawImage(image,0,0);
-					ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
-				}
-    		};
-		});
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
+
+        $("#img2").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img2').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image2");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas2');
+        var ctx = can.getContext('2d');
+
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
+
+            $("#img3").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img3').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image3");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas3');
+        var ctx = can.getContext('2d');
+
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
+
+                $("#img4").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img4').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image4");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas4');
+        var ctx = can.getContext('2d');
+
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
+
+       $("#img5").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img5').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image5");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas5');
+        var ctx = can.getContext('2d');
+
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
+
+      $("#img6").on("change", function() {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL($('#img6').prop('files')[0]);
+      fileReader.onload = function () {
+            var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+            //alert(data);
+            var image = document.getElementById("lcd-canvas-image6");
+            image.src = data;
+            var can = document.getElementById('lcd-canvas6');
+        var ctx = can.getContext('2d');
+
+            var scale = Math.min(can.width / image.width, can.height / image.height);
+        // get the top left position of the image
+        var x = (can.width / 2) - (image.width / 2) * scale;
+        var y = (can.height / 2) - (image.height / 2) * scale;
+        image.onload = function() {
+          alert('image loaded');
+          //ctx.drawImage(image,0,0);
+          ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+        }
+        };
+    });
     </script>
 </body>
 </html>
