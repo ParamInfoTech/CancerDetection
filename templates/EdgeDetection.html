@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" id="EdgeDetection">
+        <table>
+            <tr>
+                <td><input type="checkbox" id="sobel_3" name="sobel_3"></td>
+                <td>Sebel (3*3)</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="sobel_5" name="sobel_5"></td>
+                <td>Sebel (5*5)</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="canny" name="canny"></td>
+                <td>Canny</td>
+                <td><input type="number" id="canny_low" name="canny_low"></td>
+                <td><input type="number" id="canny_high" name="canny_high"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if original_image %}
+    <img src="{{ original_image }}" alt="User Image">
+    {% endif %}
+
+    {% if sobel_image %}
+    <img src="{{ sobel_image }}" alt="User Image">
+    {% endif %}
+
+    {% if laplacian %}
+    <img src="{{ laplacian }}" alt="User Image">
+    {% endif %}
+
+</body>
+</html>
